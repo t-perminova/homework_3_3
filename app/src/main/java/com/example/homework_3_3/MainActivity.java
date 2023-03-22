@@ -9,8 +9,9 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button; // создание кнопки
+    private Button buttonPlay; // создание кнопки
     private MediaPlayer mediaPlayer; // создание медиа-плеера
+    private Button buttonStop;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -18,11 +19,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = findViewById(R.id.button);
+        buttonPlay = findViewById(R.id.buttonPlay);
 
-        button.setOnClickListener(event -> {
+        buttonPlay.setOnClickListener(event -> {
             System.out.println("Сейчас заиграет музыка");
+            mediaPlayer = MediaPlayer.create(this, R.raw.m83_wait);
             mediaPlayer.start();
+        });
+
+        buttonStop = findViewById(R.id.buttonStop);
+
+        buttonStop.setOnClickListener(event -> {
+            mediaPlayer.stop();
         });
     }
 
