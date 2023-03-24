@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        super.onKeyDown(keyCode, event);
+        System.out.println("Вы нажали кнопку " + keyCode);
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) { //
+            System.out.println("Вы нажали кнопку НАЗАД");
+            mediaPlayer.stop();
+            return true;
+
+        } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) { //
+            System.out.println("Вы нажали кнопку СДЕЛАТЬ ГРОМЧЕ");
+            return true;
+
+        } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) { //
+            System.out.println("Вы нажали кнопку СДЕЛАТЬ ТИШЕ");
+            return true;
+
+        }
+
+        return false;
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
     }
@@ -47,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        mediaPlayer.stop();
     }
 
     @Override
